@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+  background-image: linear-gradient(to bottom, #000000c6, #000000a8),
+    url("/bg_health.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  /* padding: 2rem 8rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.container h1 {
+  color: #347ce9;
+  padding: 1.5rem;
+}
+
+.container .tabs {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.tabs button {
+  background-color: #4298e9;
+  border: none;
+  color: aliceblue;
+  font-weight: 700;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  width: 12rem;
+}
+
+.tabs button:hover {
+  background-color: #347ce9;
+  transition: all 0.5s;
+}
+
+.infos-table {
+  display: none;
+}
+
+/* form section */
+
+.form {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: center;
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
+}
+
+.form input {
+  outline: none;
+  border: 2px solid #4298e9;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: none;
+  color: #ffff;
+}
+
+.form button {
+  grid-column: 1;
+  background-color: #347ce9;
+  border: none;
+  color: #ffff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.form input::placeholder {
+  color: #ffff;
+}
