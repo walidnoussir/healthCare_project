@@ -11,14 +11,22 @@ const addBtn = document.querySelector(".add-btn");
 const displayDemandesBtn = document.querySelector(".display-demandes");
 const addDemandeBtn = document.querySelector(".add-demande");
 const deleteBtn = document.querySelector(".delete-btn");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
 
 // table infos
 const infosTable = document.querySelector(".infos-table tbody");
+const message = document.querySelector(".message");
 const infos = document.querySelector(".infos");
+const pagination = document.querySelector(".pagination");
+const page = document.querySelector(".page");
 
 const form = document.querySelector(".form");
 
 let demandes = [];
+
+let currPage = 1;
+const itemsPerPage = 3;
 
 function addDemande(e) {
   e.preventDefault();
@@ -44,19 +52,24 @@ function addDemande(e) {
   };
 
   demandes.push(demande);
-  clearInputs();
+  alert("demande ajoute avec succee ✅");
+  // clearInputs();
 }
 
 // display Demandes
 function displayDemandes() {
   console.log(demandes);
   infosTable.innerHTML = "";
+  message.textContent = "";
 
-  //   if (!demandes.length) {
-  //     return (infos.innerHTML = `<h1>No Demandes Yet.</h1>`);
-  //   }
+  if (!demandes.length) {
+    message.textContent = `Aucune Demande disponible.`;
+  }
 
-  demandes.forEach((demande) => {
+  const startIndex = (currPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  demandes.slice(startIndex, endIndex).forEach((demande) => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
@@ -67,22 +80,7 @@ function displayDemandes() {
       <td>${demande.email}</td>
       <td>${demande.motif}</td>
       <td>
-      <span class="edit-btn" style="cursor: pointer; margin-right: 10px">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="{1.5}"
-        stroke="currentColor"
-        className="size-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-        />
-      </svg>
-    </span>
+     
      <span  class="delete-btn" style="cursor: pointer; display: inline-block; width: 20px; height: 20px;" onclick="deleteDemande('${demande.id}')">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -103,18 +101,49 @@ function displayDemandes() {
     `;
 
     infosTable.appendChild(row);
+
+    pagination.classList.remove("hide");
+    updatePagination();
   });
+}
 
-  //   form.classList.add("hide");
-  //   infos.classList.remove("hide");
+function getTotalPages() {
+  return Math.ceil(demandes.length / itemsPerPage);
+}
 
-  //   displayDemandesBtn.classList.add("hide");
-  //   addDemandeBtn.classList.remove("hide");
+function updatePagination() {
+  const totalPages = getTotalPages();
+
+  page.textContent = currPage;
+
+  if (currPage === 1) {
+    prevBtn.parentElement.classList.add("disabled");
+  } else {
+    prevBtn.parentElement.classList.remove("disabled");
+  }
+
+  if (currPage === totalPages || totalPages === 0) {
+    nextBtn.parentElement.classList.add("disabled");
+  } else {
+    nextBtn.parentElement.classList.remove("disabled");
+  }
+
+  if (demandes.length === 0 || totalPages <= 1) {
+    pagination.classList.add("hide");
+  } else {
+    pagination.classList.remove("hide");
+  }
 }
 
 // delete demande
 function deleteDemande(id) {
   demandes = demandes.filter((demande) => demande.id !== id);
+
+  const totalPages = getTotalPages();
+  if (currPage > totalPages && totalPages > 0) {
+    currPage = totalPages;
+    pagination.classList.add("hide");
+  }
 
   displayDemandes();
 }
@@ -129,7 +158,7 @@ function clearInputs() {
   date.value = "";
 }
 
-addBtn.addEventListener("click", (e) => addDemande(e));
+form.addEventListener("submit", (e) => addDemande(e));
 
 displayDemandesBtn.addEventListener("click", () => {
   displayDemandes();
@@ -147,4 +176,19 @@ addDemandeBtn.addEventListener("click", () => {
 
   form.classList.remove("hide");
   infos.classList.add("hide");
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currPage > 1) {
+    currPage--;
+    displayDemandes();
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  const totalPages = getTotalPages();
+  if (currPage < totalPages) {
+    currPage++;
+    displayDemandes();
+  }
 });

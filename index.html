@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>HealthCare</title>
   </head>
   <body>
     <div class="container">
@@ -16,23 +16,23 @@
       </div>
 
       <form class="form">
-        <input type="text" id="lname" required placeholder="Entrer Le Nom" />
+        <input required type="text" id="lname" placeholder="Entrer Le Nom" />
 
-        <input type="text" id="fname" required placeholder="Entrer Le Prénom" />
+        <input required type="text" id="fname" placeholder="Entrer Le Prénom" />
 
         <input
+          required
           type="number"
           id="phone"
-          required
           placeholder="Entrer Le Téléphone"
         />
 
-        <input type="email" id="email" required placeholder="Entrer Le Email" />
+        <input required type="email" id="email" placeholder="Entrer Le Email" />
 
-        <input type="text" id="motif" required placeholder="Entrer Le Motif" />
+        <input required type="text" id="motif" placeholder="Entrer Le Motif" />
 
-        <input type="date" id="date" required placeholder="Entrer La Date" />
-        <button class="add-btn">Ajouter</button>
+        <input required type="date" id="date" placeholder="Entrer La Date" />
+        <button class="add-btn" type="submit">Ajouter</button>
       </form>
 
       <div class="infos hide">
@@ -50,6 +50,45 @@
           </thead>
           <tbody></tbody>
         </table>
+        <div class="pagination hide">
+          <div class="prev-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+            <button class="prev">Précédent</button>
+          </div>
+          <span class="page">1</span>
+          <div class="next-btn">
+            <button class="next">Suivant</button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="message"></h2>
       </div>
     </div>
 

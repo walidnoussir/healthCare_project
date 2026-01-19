@@ -10,12 +10,12 @@ body {
   min-height: 100vh;
   width: 100vw;
   font-family: "Inter", sans-serif;
-  background-image: linear-gradient(to bottom, #000000c6, #000000d4),
-    url("/bg_health.png");
+  background-image:
+    linear-gradient(to bottom, #000000c6, #000000d4),
+    url("/images/bg_health.png");
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-size: 100%;
   overflow-x: hidden;
 }
 
@@ -67,7 +67,7 @@ button {
 
 .form {
   display: grid;
-  grid-template-columns: 40% 40%;
+  grid-template-columns: 30% 30%;
   justify-content: center;
   column-gap: 1.5rem;
   row-gap: 1rem;
@@ -126,12 +126,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .infos {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 0 2.5rem;
 }
 
 .infos-table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   background: rgba(30, 30, 40, 0.8);
   border-radius: 12px;
@@ -187,6 +189,153 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .infos-table tbody tr td span:hover {
   transform: scale(1.2);
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+  color: #1d4ed8;
+}
+.pagination {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.pagination div {
+  padding: 0.7rem 1.2rem;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  border: 2px solid transparent;
+}
+
+.pagination div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+  border-color: rgba(96, 165, 250, 0.5);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.pagination div:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+.pagination div.disabled {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.pagination div.disabled:hover {
+  transform: none;
+  border-color: transparent;
+}
+
+.pagination button {
+  font-weight: 600;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+}
+
+.pagination svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.pagination div:hover svg {
+  transform: scale(1.1);
+}
+
+.pagination .prev-btn:hover svg {
+  transform: translateX(-3px) scale(1.1);
+}
+
+.pagination .next-btn:hover svg {
+  transform: translateX(3px) scale(1.1);
+}
+
+.pagination span {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  min-width: 60px;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  border: 2px solid rgba(96, 165, 250, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pagination {
+    gap: 1rem;
+  }
+
+  .pagination div {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .pagination button {
+    font-size: 0.85rem;
+  }
+
+  .pagination svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .pagination span {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 0.8rem;
+  }
+
+  .pagination div {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .pagination button {
+    font-size: 0.8rem;
+  }
+
+  .pagination svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .pagination span {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    min-width: 45px;
+  }
 }
 
 .hide {
@@ -254,6 +403,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .infos-table {
     font-size: 12px;
+    overflow-y: scroll;
   }
 
   .infos-table thead tr td,
@@ -325,7 +475,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-/* Very small phones */
 @media (max-width: 360px) {
   .container h1 {
     font-size: 1.1rem;
